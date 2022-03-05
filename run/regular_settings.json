@@ -5,7 +5,7 @@
     "no_future_transfer": false,
     "randomized": false,
     "banned": [],
-    "locked": [],
+    "locked": [233],
     "delete_tmp": true,
     "secs": 300,
     "use_cmd": true
