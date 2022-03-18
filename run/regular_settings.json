@@ -1,5 +1,5 @@
 {
-    "horizon": 5,
+    "horizon": 1,
     "ft_value": 1.5,
     "itb_value": 0.08,
     "no_future_transfer": false,
