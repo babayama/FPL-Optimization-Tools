@@ -128,6 +128,8 @@ def prep_data(my_data, options):
         if c['name'] == 'wildcard' and c['status_for_entry'] == 'active':
             ft = 1
             options['use_wc'] = gw
+            if options['chip_limits']['wc'] == 0:
+                options['chip_limits']['wc'] = 1
             break
 
     return {
@@ -172,6 +174,7 @@ def solve_multi_period_fpl(data, options):
     if ft <= 0:
         ft = 0
     chip_limits = options.get('chip_limits', dict())
+    booked_transfers = options.get('booked_transfers', [])
 
     # Data
     problem_name = f'mp_h{horizon}_regular' if objective == 'regular' else f'mp_h{horizon}_o{objective[0]}_d{decay_base}'
@@ -327,6 +330,29 @@ def solve_multi_period_fpl(data, options):
     if options.get("hit_limit", None) is not None:
         model.add_constraint(so.expr_sum(penalized_transfers[w] for w in gameweeks) <= options['hit_limit'], name='horizon_hit_limit')
 
+    if options.get("future_transfer_limit", None) is not None:
+        model.add_constraint(so.expr_sum(transfer_in[p,w] for p in players for w in gameweeks if w > next_gw and w != options.get('use_wc')) <= options['future_transfer_limit'], name='future_tr_limit')
+
+    if options.get("no_transfer_gws", None) is not None:
+        if len(options['no_transfer_gws']) > 0:
+            model.add_constraint(so.expr_sum(transfer_in[p,w] for p in players for w in options['no_transfer_gws']) == 0, name='banned_gws_for_tr')
+    
+    for booked_transfer in booked_transfers:
+        transfer_gw = booked_transfer.get('gw', None)
+
+        if transfer_gw is None:
+            continue
+
+        player_in = booked_transfer.get('transfer_in', None)
+        player_out = booked_transfer.get('transfer_out', None)
+
+        if player_in is not None:
+            model.add_constraint(transfer_in[player_in, transfer_gw] == 1,
+                                 name=f'booked_transfer_in_{transfer_gw}_{player_in}')
+        if player_out is not None:
+            model.add_constraint(transfer_out[player_out, transfer_gw] == 1,
+                                 name=f'booked_transfer_out_{transfer_gw}_{player_out}')
+
     # Objectives
     gw_xp = {w: so.expr_sum(points_player_week[p,w] * (lineup[p,w] + captain[p,w] + 0.1*vicecap[p,w] + so.expr_sum(bench_weights[o] * bench[p,w,o] for o in order)) for p in players) for w in gameweeks}
     gw_total = {w: gw_xp[w] - 4 * penalized_transfers[w] + ft_value * free_transfers[w] + itb_value * in_the_bank[w] for w in gameweeks}
@@ -345,6 +371,10 @@ def solve_multi_period_fpl(data, options):
 
     t0 = time.time()
     time.sleep(0.5)
+
+    if options.get('export_debug', False) is True:
+        with open("debug.sas", "w") as file:
+            file.write(model.to_optmodel())
 
     use_cmd = options.get('use_cmd', False)
 
@@ -469,4 +499,3 @@ if __name__ == '__main__':
     # solve_standard_problem() # Episode 3 & 5
     # solve_autobench_problem() # Episode 6
     # solve_randomized_problem() # Episode 7
-

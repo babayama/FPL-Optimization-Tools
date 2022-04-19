@@ -1,5 +1,5 @@
 {
-    "horizon": 6,
+    "horizon": 5,
     "ft_value": 1.5,
     "itb_value": 0.08,
     "no_future_transfer": false,
@@ -14,5 +14,8 @@
     "use_wc": null,
     "use_bb": null,
     "use_fh": null,
-    "chip_limits": {"bb": 1, "wc": 1, "fh": 0, "tc": 0}
+    "chip_limits": {"bb": 0, "wc": 0, "fh": 0, "tc": 0},
+    "future_transfer_limit": null,
+    "no_transfers_gws": [],
+    "booked_transfers": []
 }
