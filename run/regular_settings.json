@@ -1,5 +1,5 @@
 {
-    "horizon": 5,
+    "horizon": 6,
     "ft_value": 1.5,
     "itb_value": 0.08,
     "no_future_transfer": false,
@@ -9,10 +9,10 @@
     "delete_tmp": true,
     "secs": 300,
     "use_cmd": true,
-    "num_transfers": 4,
+    "num_transfers": null,
     "hit_limit": null,
     "use_wc": null,
     "use_bb": null,
     "use_fh": null,
-    "chip_limits": {"bb": 1, "wc": 1, "fh": 1, "tc": 0}
+    "chip_limits": {"bb": 1, "wc": 1, "fh": 0, "tc": 0}
 }
