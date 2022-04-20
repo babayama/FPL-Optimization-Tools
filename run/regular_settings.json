@@ -1,7 +1,7 @@
 {
-    "horizon": 1,
+    "horizon": 5,
     "ft_value": 1.5,
-    "itb_value": 0.08,
+    "itb_value": 0.05,
     "no_future_transfer": false,
     "randomized": false,
     "banned": [],
@@ -12,7 +12,7 @@
     "num_transfers": null,
     "hit_limit": null,
     "use_wc": null,
-    "use_bb": null,
+    "use_bb": 36,
     "use_fh": null,
-    "chip_limits": {"bb": 0, "wc": 0, "fh": 0, "tc": 0}
+    "chip_limits": {"bb": 1, "wc": 1, "fh": 0, "tc": 0}
 }
