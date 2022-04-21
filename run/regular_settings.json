@@ -3,7 +3,7 @@
     "ft_value": 1.5,
     "itb_value": 0.05,
     "no_future_transfer": false,
-    "randomized": false,
+    "randomized": true,
     "banned": [],
     "locked": [],
     "delete_tmp": true,
@@ -11,7 +11,7 @@
     "use_cmd": true,
     "num_transfers": null,
     "hit_limit": null,
-    "use_wc": null,
+    "use_wc": 34,
     "use_bb": 36,
     "use_fh": null,
     "chip_limits": {"bb": 1, "wc": 1, "fh": 0, "tc": 0}
