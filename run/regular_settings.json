@@ -1,9 +1,15 @@
 {
     "horizon": 1,
     "ft_value": 1.5,
+<<<<<<< HEAD
     "itb_value": 0.08,
     "no_future_transfer": true,
     "randomized": false,
+=======
+    "itb_value": 0.05,
+    "no_future_transfer": false,
+    "randomized": true,
+>>>>>>> 3bbdc6da3c2da1d48f55c1c8d6cfd9038a4fa169
     "banned": [],
     "locked": [],
     "delete_tmp": true,
@@ -14,8 +20,13 @@
     "use_wc": null,
     "use_bb": null,
     "use_fh": null,
+<<<<<<< HEAD
     "chip_limits": {"bb": 0, "wc": 0, "fh": 0, "tc": 0},
     "future_transfer_limit": null,
     "no_transfers_gws": [],
     "booked_transfers": []
 }
+=======
+    "chip_limits": {"bb": 1, "wc": 1, "fh": 0, "tc": 0}
+}
+>>>>>>> 3bbdc6da3c2da1d48f55c1c8d6cfd9038a4fa169
